@@ -1,0 +1,37 @@
+<!-- Comentário em HTML -->
+<!-- Hyper Text Markup Language -->
+<!DOCTYPE html> <!-- Tipo do Documento HTML -->
+<html lang="pt-br" xmlns="http://www.thymeleaf.org"> <!-- Language -> PT-BR -->
+<head> <!-- Parte superior do site -->
+    <!-- link:css -->
+    <link rel="stylesheet" href="/style.css">
+    <title>Filmes Vistos</title> <!-- Titulo da guia -->
+</head> <!-- Alt + Shift + A -->
+<body> <!-- Corpo -->
+    <!-- div.container-filmes>div.container-buttons>a>button.button-add -->
+    <div class="container-filmes">
+        <div class="container-buttons">
+            <a href="/filme/form">
+                <button class="button-add">Adicionar novo filme</button>
+            </a>
+        </div>
+        <!-- div.container-lista-filmes>div.filme>img -->
+        <div class="container-lista-filmes">
+            <div th:each="filme : ${filmes}" class="filme">
+                <img th:src="@{${filme.imagem}}" alt="">
+                <h2 th:text="${filme.nome}">Nome do Filme</h2> <!-- Titulo menor -->
+                <p th:text="${#dates.format(filme.data, 'yyyy-MM-dd')}">Ano do Filme</p> <!-- Texto -->
+                <div class="filme-buttons"> <!-- div.filme-buttons>a>button.editar-btn -->
+                    <a th:href="@{/filme/form/{id}(id=${filme.id})}">
+                        <button class="editar-btn">Editar</button>
+                    </a>
+                    <a th:href="@{/filme/delete/{id}(id=${filme.id})}">
+                        <button class="deletar-btn">Deletar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
